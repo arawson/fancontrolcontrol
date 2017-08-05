@@ -1,0 +1,11 @@
+[Unit]
+Description=Configure fan control to handle unpredictable pwmconfig order.
+ConditionFileNotEmpty=/opt/fancontrolcontrol/fancontrol.template
+Before=fancontrol.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/fancontrolcontrol/fancontrolcontrol.py -i /opt/fancontrolcontrol/fancontrol.template -o /etc/fancontrol -m /sys/class/hwmon/
+
+[Install]
+WantedBy=multi-user.target
